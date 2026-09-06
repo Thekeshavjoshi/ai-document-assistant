@@ -1,8 +1,18 @@
 # 🤖 AI Document Assistant
 
+PDF → RAG → FAISS → LLM → Answer
+
 An AI-powered **Retrieval-Augmented Generation (RAG)** application that allows users to upload PDF documents and interact with them using natural-language questions.
 
 The system processes uploaded documents, extracts and chunks their content, generates semantic embeddings using **Sentence Transformers**, stores them in a **FAISS vector index**, retrieves the most relevant context for a user's query, and uses a **Groq-powered LLM** to generate grounded answers based only on the document content.
+
+---
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![FAISS](https://img.shields.io/badge/FAISS-Vector%20Search-green)
+![RAG](https://img.shields.io/badge/RAG-Retrieval%20Augmented%20Generation-purple)
+![Groq](https://img.shields.io/badge/Groq-LLM-orange)
+![Sentence Transformers](https://img.shields.io/badge/Sentence%20Transformers-Embeddings-yellow)
 
 ---
 
@@ -26,86 +36,43 @@ The application combines **Document Processing + Semantic Search + Vector Databa
 
 ---
 
+## — 📸 Demo
+
+![AI Document Assistant Demo](demo.png)
+
+The user can continue asking questions about the document.
+
 # ✨ Key Features
 
 ### 📄 PDF Document Upload
-
-Upload PDF documents directly through the Streamlit interface.
-
-The application extracts text from the uploaded document using **PyMuPDF**.
 
 ---
 
 ### ✂️ Intelligent Text Chunking
 
-Large documents are divided into smaller overlapping chunks before embedding.
-
-Current configuration:
-
-* **Chunk Size:** 1000 characters
-* **Chunk Overlap:** 200 characters
-
-Overlapping chunks help preserve contextual information between adjacent sections.
-
 ---
 
 ### 🧠 Semantic Embeddings
-
-The application converts document chunks into numerical vector representations using:
-
-**Sentence Transformers — `all-MiniLM-L6-v2`**
-
-This enables the system to understand semantic similarity rather than relying only on exact keyword matching.
 
 ---
 
 ### 🔎 Vector Similarity Search
 
-Document embeddings are stored in a **FAISS** vector index.
-
-FAISS performs efficient similarity search to identify document chunks that are most relevant to the user's question.
-
-The system uses normalized embeddings with an `IndexFlatL2` index for similarity-based retrieval.
-
 ---
 
 ### 🤖 Retrieval-Augmented Generation
-
-Instead of asking the LLM to answer from its general knowledge, the application first retrieves relevant information from the uploaded document.
-
-The retrieved context is then passed to the LLM to generate a grounded response.
-
-This helps reduce hallucination and keeps answers connected to the uploaded document.
 
 ---
 
 ### 💬 Natural Language Question Answering
 
-Users can ask questions naturally, for example:
-
-> "What is the main idea of this document?"
-
-> "Explain the transformer architecture."
-
-> "What are the key findings?"
-
-The system retrieves relevant content and generates an answer based on the document.
-
 ---
 
 ### 📝 Document Summarization
 
-The application also provides functionality to generate a concise summary of the uploaded document.
-
-This makes it easier to understand lengthy documents without manually reading every page.
-
 ---
 
 ### 🖥️ Interactive Streamlit UI
-
-The complete pipeline is exposed through a simple web interface built with **Streamlit**.
-
-Users don't need to interact with the underlying Python pipeline directly.
 
 ---
 
@@ -188,28 +155,11 @@ The application follows an end-to-end **RAG pipeline**.
 
 The user uploads a PDF document through the Streamlit interface.
 
-```text
-PDF Document
-     │
-     ▼
-Streamlit Upload
-```
-
 ---
 
 ## Step 2 — Extract Text
 
 The application uses **PyMuPDF** to extract text from the PDF.
-
-```text
-PDF
- │
- ▼
-PyMuPDF
- │
- ▼
-Extracted Text
-```
 
 The extracted text becomes the input for the document processing pipeline.
 
@@ -219,24 +169,7 @@ The extracted text becomes the input for the document processing pipeline.
 
 Large documents are divided into smaller chunks.
 
-Current configuration:
-
-```text
-Chunk Size    = 1000
-Chunk Overlap = 200
-```
-
 Example:
-
-```text
-Document
-│
-├── Chunk 1
-├── Chunk 2
-├── Chunk 3
-├── Chunk 4
-└── ...
-```
 
 The overlap helps maintain context between neighboring chunks.
 
@@ -320,16 +253,6 @@ The query embedding is compared with the vectors stored in FAISS.
 
 The system retrieves the most relevant document chunks.
 
-```text
-Query Embedding
-       │
-       ▼
-FAISS Similarity Search
-       │
-       ▼
-Relevant Document Chunks
-```
-
 ---
 
 ## Step 8 — Generate Answer Using LLM
@@ -338,27 +261,6 @@ The retrieved document context is provided to the Groq-powered LLM.
 
 The LLM is instructed to answer using the retrieved document context rather than relying on unsupported information.
 
-```text
-Retrieved Context
-       +
-User Question
-       │
-       ▼
-Groq LLM
-       │
-       ▼
-Final Answer
-```
-
----
-
-## Step 9 — 📸 Demo
-
-![AI Document Assistant Demo](demo.png)
-
-The user can continue asking questions about the document.
-
----
 
 # 🧠 RAG Pipeline
 
@@ -572,14 +474,6 @@ FAISS Index
  ↓
 Persistent Vector Store
 ```
-
----
-
-# 📸 Screenshots
-
-## 🖥️ Application Interface
-
-Add your main Streamlit application screenshot here:
 
 ```text
 ![AI Document Assistant UI](screenshots/main-ui.png)
