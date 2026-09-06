@@ -352,9 +352,9 @@ Final Answer
 
 ---
 
-## Step 9 — Display Result
+## Step 9 — 📸 Demo
 
-The generated answer is displayed inside the Streamlit application.
+![AI Document Assistant Demo](demo.png)
 
 The user can continue asking questions about the document.
 
